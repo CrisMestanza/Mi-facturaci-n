@@ -26,7 +26,7 @@
                 <a type="submit" id="btnEditar" class="btn btn-success" href="<?= base_url('/ventas/nuevaventa') ?>">
                 Nueva venta
                 </a> 
-                <table class="table datatable">
+                <table class="table datatable" id="tabla">
                     <thead>
                         <tr>
                             <th scope="col">Venta</th>
@@ -126,7 +126,7 @@
 
 <script type="text/javascript">
     
-    $(document).ready(function(){
+$(document).ready(function(){
     $("#consultar").on("click", function(){
 
         var inputValue = $("#doccliente").val();

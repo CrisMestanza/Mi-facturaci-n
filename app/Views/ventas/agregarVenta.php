@@ -64,7 +64,7 @@
                     <br>
                 <!-- Table with stripped rows -->
                 
-                    <table class="table datatable">
+                    <table class="table datatable" id="tabla">
                         <thead>
                             <tr>
                                 <th>Descripcion</th>
@@ -156,7 +156,12 @@
                                 <button type="button" class="btn btn-success" style="margin-left: 1rem;">Cerrar</button>
                             </div>
                             <div style="margin-left: 50px;">
-                                hola
+                                <span>Total Op. Exonerada: S/.</span>
+                                <input type="number" class="ventaTotal" readonly>
+                                <div style="margin-left: 73px;">
+                                    <span>Pago Total: S/.</span>
+                                    <input type="number" class="ventaTotal" readonly>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -323,7 +328,21 @@ $(function(){
         let precioUnitario = parseFloat(currentRow.find("#precioUnitario").val()); // Convertir a flotante desde el campo de la misma fila
         let total = isNaN(cantidad) || isNaN(precioUnitario) ? 0 : precioUnitario * cantidad; // Calcular el total solo si ambos valores son números
         currentRow.find('#total').val(total);
+
+        calcularTotal();
     });
+
+    // Calcular total de la venta
+    let calcularTotal =()=>{
+        let total = 0;
+        // response, function(index, value)
+        let currentRow = $(this).closest('#total');
+        $('#tabla tbody #total').each(function(index, value){
+            total+= parseFloat($(this).val())
+            console.log(total);
+            $(".ventaTotal").val(total);
+        });
+    }
 })
 
 
