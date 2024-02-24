@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2" xmlns:udt="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionContent><ds:Signature Id="FacturacionIntegralSign">
+  <ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+    <ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+  <ds:Reference URI=""><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>JAziTOsFEmaTZOp1Nzu/wrL/+Xc=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>Kpq8ypPDvBNKqPW39OkmdOt70ThKgJRfTafJDf/PYJ+xfV8q6y6M5H++kADmmeViEMYyKTxQhfEPGfjxOHgz8EdQprJr/w98sUt/Hf1A/856NPu7Pb673Ppup1wQscMDzHPnPE8jIDMDDPVE6RpzrDHfVB53v2uQHkXJUsmV3Zu6shbi1e5ZFutMWVn0vKFgkOPnukeR0BP6rjPpus3zVYmV6z2M7QbMtkjxJmEIF1RCjocosiqCAaRbKP51GBJvIyP2VcCMwQK6NX1cdCUDEsTO6bVfYKiuq3PgTv4lltsdpcnKzmvoDpSveoQ9nGs3l1dZVYEHTCGwcJiHsxCA7Q==</ds:SignatureValue>
+<ds:KeyInfo><ds:X509Data><ds:X509Certificate>MIIFCDCCA/CgAwIBAgIJAKfweUaeVfBrMA0GCSqGSIb3DQEBCwUAMIIBDTEbMBkGCgmSJomT8ixkARkWC0xMQU1BLlBFIFNBMQswCQYDVQQGEwJQRTENMAsGA1UECAwETElNQTENMAsGA1UEBwwETElNQTEYMBYGA1UECgwPVFUgRU1QUkVTQSBTLkEuMUUwQwYDVQQLDDxETkkgOTk5OTk5OSBSVUMgMjA2MDQwNTE5ODQgLSBDRVJUSUZJQ0FETyBQQVJBIERFTU9TVFJBQ0nDk04xRDBCBgNVBAMMO05PTUJSRSBSRVBSRVNFTlRBTlRFIExFR0FMIC0gQ0VSVElGSUNBRE8gUEFSQSBERU1PU1RSQUNJw5NOMRwwGgYJKoZIhvcNAQkBFg1kZW1vQGxsYW1hLnBlMB4XDTIyMDUwMTAzMTM1OFoXDTI0MDQzMDAzMTM1OFowggENMRswGQYKCZImiZPyLGQBGRYLTExBTUEuUEUgU0ExCzAJBgNVBAYTAlBFMQ0wCwYDVQQIDARMSU1BMQ0wCwYDVQQHDARMSU1BMRgwFgYDVQQKDA9UVSBFTVBSRVNBIFMuQS4xRTBDBgNVBAsMPEROSSA5OTk5OTk5IFJVQyAyMDYwNDA1MTk4NCAtIENFUlRJRklDQURPIFBBUkEgREVNT1NUUkFDScOTTjFEMEIGA1UEAww7Tk9NQlJFIFJFUFJFU0VOVEFOVEUgTEVHQUwgLSBDRVJUSUZJQ0FETyBQQVJBIERFTU9TVFJBQ0nDk04xHDAaBgkqhkiG9w0BCQEWDWRlbW9AbGxhbWEucGUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQC1WpGOLZayBuCCZBLIDIaNjeprnDTJOcdj+KmzetJsI14EHfsUPov8lv9nUIIUJbJkcMNBTZs6RzJGQ3ghfM9fKpun5RtPbKE7MJmADvZ5PkAZnWWkMsU/9oV9yRf62pCh5Et6oueXOo4sgomZcVK7YisZabOMfiX64Q1ytDlMfLXEPeAI2qqD2fmZ0e3yqSiTlGLCHq4gy2A6XjhwejShAWS/VbOLoOotx8L8eQoZcCuVlz/sDNhGGNxg/34Yw3hZgN3lebhSUGQKFPVekyIrZeQfhbcHefAo+RBW0IcsVPB/w9bT5S1si1zBvAQHbv/zRy3o1oExXU5owg+KNAfXAgMBAAGjZzBlMB0GA1UdDgQWBBSutRFcyJrUkG8WA9hRC+lIJdlgFDAfBgNVHSMEGDAWgBSutRFcyJrUkG8WA9hRC+lIJdlgFDATBgNVHSUEDDAKBggrBgEFBQcDATAOBgNVHQ8BAf8EBAMCB4AwDQYJKoZIhvcNAQELBQADggEBAGuqeW50XOYgJlXj7XAsF+ViaroOSEEdqclEGBAZ45jnorKUOA7Dks9RRmPkPM/ZSge5m53Q5krfNp7jpHiU6zGcC70nHSk51tUyrLcs5YTV7/TD6w4+IfNrXLzEOjaH0nOajWLCcb7qhhuq4jDYtksqKiLp8cCaHHk/eM7N/h74fCp7ochrb6ZgKi3awuivOAIP5HzSZ6vb0F4zgoS746z8kRwfUGXXiqLxOH/RggyUrakoiVBuL1K8/rI85mm179KnbyZFuQH8ue+nkaCWvJI1PdiRVcrjHaFpXrd22QQc88HRG2ZoMmcpksYSQNWi1EQiIMJQSlpeITKUDBymweE=</ds:X509Certificate></ds:X509Data></ds:KeyInfo></ds:Signature></ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
+  <cbc:CustomizationID>2.0</cbc:CustomizationID>
+  <cbc:ID>TESTEOBOLETAID</cbc:ID>
+  <cbc:IssueDate>TESTEOFECHA</cbc:IssueDate>
+  <cbc:IssueTime>TESTEOHORA</cbc:IssueTime>
+  <cbc:InvoiceTypeCode listID="AQUI VA EL CODIGO DEL TIPO DE INVOICE, 0101 para ventas" listAgencyName="PE:SUNAT" listName="Tipo de Documento" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo01" name="Tipo de Operacion" listSchemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo51">AQUI VA EL TIPO DE DOCUMENTO SI ES BOLETA O FACTURA EL NUM</cbc:InvoiceTypeCode>
+  <cbc:Note languageLocaleID="1000">AQUI VA LA CANTIDAD EN LETRAS</cbc:Note>
+  <cbc:DocumentCurrencyCode listID="ISO 4217 Alpha" listName="Currency" listAgencyName="United Nations Economic Commission for Europe">AQUI VA LA ABREVIATURA DE LA MONEDA</cbc:DocumentCurrencyCode>
+  <cac:Signature>
+    <cbc:ID>AQUI VA LA RUC DE LA MUA EMPRESA</cbc:ID>
+    <cac:SignatoryParty>
+      <cac:PartyIdentification>
+        <cbc:ID>OTRA VEZ LA RUC AQUI</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyName>
+        <cbc:Name><![CDATA[AQUI VA EL NOMBRE DE LA EMPRESA]]></cbc:Name>
+      </cac:PartyName>
+    </cac:SignatoryParty>
+    <cac:DigitalSignatureAttachment>
+      <cac:ExternalReference>
+        <cbc:URI>AQUI RUC OTRA VEZ</cbc:URI>
+      </cac:ExternalReference>
+    </cac:DigitalSignatureAttachment>
+  </cac:Signature>
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="6">LA RUC DE LA EMPRESA</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyName>
+        <cbc:Name><![CDATA[AQUI VA EL NOMBRE DE LA EMPRESA]]></cbc:Name>
+      </cac:PartyName>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName><![CDATA[AQUI VA EL NOMBRE DE LA EMPRESA]]></cbc:RegistrationName>
+        <cac:RegistrationAddress>
+          <cbc:ID schemeName="Ubigeos" schemeAgencyName="PE:INEI">AQUI VA EL UBIGEO DE LA EMPRESA</cbc:ID>
+          <cbc:AddressTypeCode listAgencyName="PE:SUNAT" listName="Establecimientos anexos">0000</cbc:AddressTypeCode>
+          <cbc:CityName>PROVINCIA</cbc:CityName>
+          <cbc:CountrySubentity>DEPARTAMENTO</cbc:CountrySubentity>
+          <cbc:District>DISTRITO</cbc:District>
+          <cac:AddressLine>
+            <cbc:Line>DIRECCION DE LA MUAEMPRESA</cbc:Line>
+          </cac:AddressLine>
+          <cac:Country>
+            <cbc:IdentificationCode listID="ISO 3166-1" listAgencyName="United Nations Economic Commission for Europe" listName="Country">PE</cbc:IdentificationCode>
+          </cac:Country>
+        </cac:RegistrationAddress>
+      </cac:PartyLegalEntity>
+    </cac:Party>
+  </cac:AccountingSupplierParty>
+  <cac:AccountingCustomerParty>
+    <cac:Party>
+      <cac:PartyIdentification>
+        <cbc:ID schemeID="1" schemeName="Documento de Identidad" schemeAgencyName="PE:SUNAT" schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06">12345678</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName><![CDATA[CLIENTE DE PRUEBA]]></cbc:RegistrationName>
+      </cac:PartyLegalEntity>
+    </cac:Party>
+  </cac:AccountingCustomerParty>
+  <cac:PaymentTerms>
+    <cbc:ID>FormaPago</cbc:ID>
+    <cbc:PaymentMeansID>Contado</cbc:PaymentMeansID>
+  </cac:PaymentTerms>
+  <cac:TaxTotal>
+    <cbc:TaxAmount currencyID="AQUI VA LA ABREVIATURA DE LA MONEDA, POR EJ PEN">AQUI VA EL TOTAL GRAVADO, O SEA CUANDO IMPUESTO HAY</cbc:TaxAmount>
+    <cac:TaxSubtotal>
+      <cbc:TaxableAmount currencyID="AQUI VA LA ABREVIATURA DE LA MONEDA, POR EJ PEN">MONTO DE VENTA TOTAL</cbc:TaxableAmount>
+      <cbc:TaxAmount currencyID="AQUI VA LA ABREVIATURA DE LA MONEDA">AQUI VA TOTAL IGV</cbc:TaxAmount>
+      <cac:TaxCategory>
+        <cac:TaxScheme>
+          <cbc:ID schemeName="Codigo de tributos" schemeAgencyName="PE:SUNAT" schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo05">9997</cbc:ID>
+          <cbc:Name>EXO</cbc:Name>
+          <cbc:TaxTypeCode>VAT</cbc:TaxTypeCode>
+        </cac:TaxScheme>
+      </cac:TaxCategory>
+    </cac:TaxSubtotal>
+  </cac:TaxTotal>
+  <cac:LegalMonetaryTotal>
+    <cbc:LineExtensionAmount currencyID="ABREVIATURA DE LA MONEDA, POR EJ PEN">TOTAL DE LA VENTA</cbc:LineExtensionAmount>
+    <cbc:TaxInclusiveAmount currencyID="ABREVIATURA DE LA MONEDA, POR EJ PEN">TOTAL DE LA VENTA</cbc:TaxInclusiveAmount>
+    <cbc:AllowanceTotalAmount currencyID="ABREVIATURA DE LA MONEDA, POR EJ PEN">00 veo q le ponen siempre xd</cbc:AllowanceTotalAmount>
+    <cbc:ChargeTotalAmount currencyID="ABREVIATURA DE LA MONEDA, POR EJ PEN">00 veo q le ponen siempre xd</cbc:ChargeTotalAmount>
+    <cbc:PrepaidAmount currencyID="ABREVIATURA DE LA MONEDA, POR EJ PEN">00 veo q le ponen siempre xd, es anticipo xd</cbc:PrepaidAmount>
+    <cbc:PayableAmount currencyID="ABREVIATURA DE LA MONEDA, POR EJ PEN">TOTAL DE LA VENTA</cbc:PayableAmount>
+  </cac:LegalMonetaryTotal>
+  <cac:InvoiceLine>
+    <cbc:ID>AQUI VA EL NUMERO D INVOICE, 1 AL COMENZAR Y +1 POR CADA LINEA</cbc:ID>
+    <cbc:InvoicedQuantity unitCode="AQUI VA EL CODIGO D LA UNIDAD SEGUN DB">AQUI VA LA CANTIDAD DEL PRODUCTO, 2 decimales</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="ABREVIATURA DE LA MONEDA">AQUI VA CUANTO SALE EL SUBTOTAL DE ESTE PRODUCTO, con dos decimales</cbc:LineExtensionAmount>
+    <cac:PricingReference>
+      <cac:AlternativeConditionPrice>
+        <cbc:PriceAmount currencyID="ABREVIATURA DE LA MONEDA">AQUI VA EL PRECIO UNITARIO DEL PRODUCTO, CON UN DECIMAL SI TUVIERA, SINO EL NUMERO ENTERO SOLO</cbc:PriceAmount>
+        <cbc:PriceTypeCode listName="Tipo de Precio" listAgencyName="PE:SUNAT" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16">01</cbc:PriceTypeCode>
+      </cac:AlternativeConditionPrice>
+    </cac:PricingReference>
+    <cac:TaxTotal>
+      <cbc:TaxAmount currencyID="ABREVIATURA DE MONEDA">0.00</cbc:TaxAmount>
+      <cac:TaxSubtotal>
+        <cbc:TaxableAmount currencyID="ABREVIATURA DE LA MONEDA">PRECIO SUBTOTAL DEL PRODUCTO, 2 DECIMALES</cbc:TaxableAmount>
+        <cbc:TaxAmount currencyID="ABREVIATURA DE LA MONEDA">0.00</cbc:TaxAmount>
+        <cac:TaxCategory>
+          <cbc:Percent>18</cbc:Percent>
+          <cbc:TaxExemptionReasonCode>20</cbc:TaxExemptionReasonCode>
+          <cac:TaxScheme>
+            <cbc:ID>9997</cbc:ID>
+            <cbc:Name>EXO</cbc:Name>
+            <cbc:TaxTypeCode>VAT</cbc:TaxTypeCode>
+          </cac:TaxScheme>
+        </cac:TaxCategory>
+      </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:Item>
+      <cbc:Description><![CDATA[NOMRBE DE PRODUCTO]]></cbc:Description>
+      <cac:SellersItemIdentification>
+        <cbc:ID>AQUI VA EL ID DEL PRODUCTO SEGUN NUESTRA DB</cbc:ID>
+      </cac:SellersItemIdentification>
+      <cac:CommodityClassification>
+        <cbc:ItemClassificationCode>-</cbc:ItemClassificationCode>
+      </cac:CommodityClassification>
+      <cac:Price>
+        <cbc:PriceAmount currencyID="ABREVIATURA DE LA MONEDA">AQUI VA PRECIO UNITARIO, CON UN SOLO DECIMAL SI TUVIERA</cbc:PriceAmount>
+      </cac:Price>
+    </cac:Item>
+  </cac:InvoiceLine>
+</Invoice>
