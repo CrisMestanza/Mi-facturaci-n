@@ -33,7 +33,29 @@ class configController extends BaseController
     }
 
     public function editar(){
+//Para las variables de sesión en ventas
+        $departamento = $_POST['departamento'];
+        $departamentosModel = new DepartamentosModel();
+        $getDepartamento = $departamentosModel->Departamentos($departamento);
+        $resultDepartamento = $getDepartamento[0]['nombredepartamento']; 
         
+        $provincia = $_POST['provincia'];
+        $provinciasModel = new ProvinciaModel();
+        $getProvincia = $provinciasModel->Provincia($provincia);
+        $resultProvincia = $getProvincia[0]['nombreprovincia'];
+ 
+
+        $distrito = $_POST['distrito'];
+        $provinciasModel = new DistritoModel();
+        $getDistrito = $provinciasModel->Distrito($distrito);
+        $resultDistrito = $getDistrito[0]['nombredistrito'];
+
+        $session = session();
+        $session->set('ubigueo',$_POST['ubigueo']);
+        $session->set('provincia',$resultProvincia);
+        $session->set('distrito',$resultDistrito);
+        $session->set('departamento',$resultDepartamento);
+//Fin de las session de ventas
 
         $ruc = $_POST['rucCategoria'];
         $razonsocial = $_POST['razonSocial'];

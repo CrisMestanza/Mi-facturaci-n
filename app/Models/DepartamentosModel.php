@@ -27,4 +27,9 @@ class DepartamentosModel extends Model
         return $this->db->table('departamentos')
         ->get()->getResultArray();
     }
+
+    public function Departamentos($departamento){  //Departamento especifico para la variable session
+        return $this->db->table('departamentos')->where('iddepartamentos', $departamento)
+        ->get()->getResultArray();
+    }
 }

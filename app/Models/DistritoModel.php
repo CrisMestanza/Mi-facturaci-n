@@ -34,4 +34,11 @@ class DistritoModel extends Model
         ->where('iddistrito',$id)
         ->get()->getResultArray();
     }
+
+
+    public function Distrito($id){ //Para la variable session
+        return $this->db->table('distritos')
+        ->where('iddistrito',$id)
+        ->get()->getResultArray();
+    }
 }

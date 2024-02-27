@@ -22,78 +22,6 @@ class Home extends BaseController
         
         return view('welcome_message');
     }
-
-    public function mostrar($data){
-   
-        $xmlGenerado = generarXML($data);
-
-        $url= APPPATH.'Libraries/firma/xmlSinFirmar/output.xml';
-        file_put_contents($url, $xmlGenerado);
-     
-        echo 'XML generado y guardado en output.xml';
-
-        
-        include(APPPATH."Libraries/firma/funcionesFirma/firmado.php");
-
-      
-        $xmlFirmado= firmarXML($url);
-
-        
-        // $data['rucemisor].'-'.$data['tipocomprobante'].
-        // '-'.$data['seriecomprobante'].'-'.$data['numerocorrelativo'].'.xml'     
-        
-        $nombreXml= $data['rucEmisor'].'-'.$data['tipoComprobante'].'-'.$data['serieComprobante'].'-'.$data['numComprobante'].'.xml';
-
-
-        $ruta = APPPATH."Libraries/firma/xmlFirmado/".$nombreXml;
-
-        file_put_contents($ruta,  $xmlFirmado);   
-
-        echo 'XML generado y firmado en output.xml';
-
-
-       
-    }
-    public function recibirDatosXml(){
-            $data= [
-                'serieComprobante'=>'F001',
-                'numComprobante'=>'001',
-                'tipoComprobante'=>'01',
-                // 'fechaEmision',//año-mes-dia
-                // 'hora',
-                // 'canLetras',
-                // 'abrvMoneda',
-                'rucDni'=>'12345678',
-                'rucEmisor'=>'10755184778',
-                'razonSocial'=>'CLIENTE DE PRUEBA',
-                // 'ubigueo',
-                // 'provincia',
-                // 'departamento',
-                // 'distrito',
-                // 'direccion',
-                // 'codCatalogo6',
-                // 'igv',
-                // 'gravada',
-                // 'ventaTotal',
-                // 'codCatalogo5',
-                // 'nombreCatalogo5',
-                // 'tipoCatalogo5',
-                // 'totalConImpuesto',
-                // 'descuento',
-                // 'otrosCargos',
-                // 'importeTotal',
-                // 'ordenItem',
-                // 'cantidadProducto',
-                // 'subTotalProducto',
-                // 'codUnidad',
-                // 'precioUnitario',
-                // 'codCatalogo16',
-                // 'idProducto',
-                // 'nombreProducto',
-                // 'nombreProducto',
-            ];
-             $this->mostrar($data);
-    }
     public function login(){
 
         $result= new UsuariosModel();
@@ -111,7 +39,8 @@ class Home extends BaseController
                 if ($contrasena == $usuario['contrasena']) {
 
                     $session = session();
-
+                    
+                    $session->get('usuario');
                     $model2 = new EmpresaModel();
                     $empresa = $model2->findAll();
 
@@ -147,10 +76,6 @@ class Home extends BaseController
     //     $result= $usuario->setUsuarios(12,12);
     //     var_dump($result);
     // }
-
-
-
-
 
     public function logout(){
         $session = session();
@@ -228,7 +153,6 @@ class Home extends BaseController
             
         }
     }
-
     public function XML(){
         return view('welcome_message2');
     }

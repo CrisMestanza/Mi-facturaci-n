@@ -54,6 +54,7 @@ $routes->post('/configuracion/editar/','configController::editar/');
 //Ventas
 $routes->get('/ventas','Ventas::ventas');
 $routes->get('/ventas/nuevaventa','Ventas::setVenta');
+$routes->post('ventas/generar','Ventas::recibirDatosXml');
 
 //Home
 $routes->get('/logout','Home::logout');

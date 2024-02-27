@@ -16,10 +16,8 @@
     <div class="col-lg-12"> 
         <div class="card">
             <div class="card-body">
-         <form action="<?php echo base_url("compras/agregar")?>" method="post" enctype="multipart/form-data" autocomplete="off">
+         <form action="<?php echo base_url("ventas/generar")?>" method="post" enctype="multipart/form-data" autocomplete="off">
             <h5 class="card-title">Nueva compra</h5> 
-
-                
             <h4>Datos del cliente:</h4>
                     <div style="display:flex">
                     
@@ -27,7 +25,7 @@
                         <div >
                             <label for="">Nº Documento (dni/ruc)</label><br>
                             <input class="form-control" type="text" name="doccliente" id="doccliente">
-                            <input type="button" class="btn btn-dark" value="search" id="consultar">
+                             <input type="button" class="btn btn-dark" value="search" id="consultar"> <!-- Boton search -->
                         </div>
                         <br>
                         <div>
@@ -46,13 +44,28 @@
                     </div>
 
                     <br>
-                    <h4>Datos de la Compra</h4>
+                    <h4>Datos de la venta</h4>
                     <div style="display:flex">
                         <div class="input-group" id="compra">
-                            <label class="input-group-text">Número de documento</label>
-                            <input type="text" class="form-control" aria-label="With textarea" name="numcorrelativo">
+                            <label class="input-group-text">Tipo documento:</label>
+
+                            <select name="tipoDocumento" id="tipoDocumento" class="form-control"  aria-label="With textarea">
+                                <?php foreach ($tipoDocumento as $tipoDocumento) {?>
+                                    <option value="<?= $tipoDocumento['nombredocumento'] ?>"> <?= $tipoDocumento['nombredocumento'] ?> </option>
+                                <?php } ?>
+                            </select>
                         </div>
-                      
+
+                        <div class="input-group">
+                            <label class="input-group-text">Serie</label>
+                            <input type="text" class="form-control" aria-label="With textarea" id="serie" name="serie">
+                        </div>
+
+                        <div class="input-group">
+                            <label class="input-group-text">N° Placa</label>
+                            <input type="text" class="form-control" aria-label="With textarea" name="placa">
+                        </div>
+
                         <div class="input-group">
                             <label class="input-group-text">Fecha</label>
                             <input type="date" class="form-control" aria-label="With textarea" name="fechDocumento">
@@ -150,10 +163,10 @@
                             <div style="display:flex;">
                                 
                             <div class="modal-footer">
-                                <button type="submit" id="guardar" class="btn btn-info" >Guardar productos</button>
+                                <button type="submit" id="guardar" class="btn btn-info" >Generar comprobante de pago</button>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-success" style="margin-left: 1rem;">Cerrar</button>
+                                <button type="button" class="btn btn-success" style="margin-left: 1rem;">Regresar a ventas</button>
                             </div>
                             <div style="margin-left: 50px;">
                                 <span>Total Op. Exonerada: S/.</span>
@@ -335,7 +348,6 @@ $(function(){
     // Calcular total de la venta
     let calcularTotal =()=>{
         let total = 0;
-        // response, function(index, value)
         let currentRow = $(this).closest('#total');
         $('#tabla tbody #total').each(function(index, value){
             total+= parseFloat($(this).val())
@@ -343,7 +355,22 @@ $(function(){
             $(".ventaTotal").val(total);
         });
     }
+
+    $('#tipoDocumento').change(function(){
+        let seleccion = $(this).val();
+        let serie = "";
+        if(seleccion=="Boleta"){
+            serie = "B001"
+        }
+        else if (seleccion=="Factura") {
+            serie = "F001" 
+        }
+        
+        $('#serie').val(serie);
+
+    });
 })
+
 
 
 

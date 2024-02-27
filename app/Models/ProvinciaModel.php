@@ -28,5 +28,11 @@ class ProvinciaModel extends Model
         ->where('iddepartamento',$id)
         ->get()->getResultArray();
     }
+
+    public function Provincia($id){ //Para la variable session
+        return $this->db->table('provincias')
+        ->where('idprovincia',$id)
+        ->get()->getResultArray();
+    }
 }
 

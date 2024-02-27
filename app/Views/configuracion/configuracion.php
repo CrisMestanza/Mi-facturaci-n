@@ -120,7 +120,7 @@
 
                       <label for="nombreProducto2">Departamento</label><br>
 
-                      <select class="form-select" id="mySelect" aria-label="Default select example" name="categoria2">
+                      <select class="form-select" id="mySelect" aria-label="Default select example" name="departamento">
                         <?php foreach ($departamentos as $departamento) { ?>
                           <option selected value="<?= $departamento['iddepartamentos'] ?>">
                             <?= $departamento['nombredepartamento'] ?>
@@ -132,14 +132,14 @@
 
                       <label for="nombreProducto2">Provincia</label><br>
 
-                      <select class="form-select" id="secondSelect" aria-label="Default select example" name="categoria2">
+                      <select class="form-select" id="secondSelect" aria-label="Default select example" name="provincia">
                         
                       </select>
 
 
                       <label for="nombreProducto2">Distrito</label><br>
 
-                      <select class="form-select" id="distrito" aria-label="Default select example" name="categoria2" >
+                      <select class="form-select" id="distrito" aria-label="Default select example" name="distrito" >
                         
                       </select>
 
