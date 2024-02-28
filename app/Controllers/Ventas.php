@@ -58,21 +58,34 @@ class Ventas extends BaseController
 
     //Recibir los datos para enviar a generar XML
     public function recibirDatosXml(){
+
         if($_POST['tipoDocumento']=="Boleta"){
             $tipoComprobante= 03;
         }elseif($_POST['tipoDocumento']=="Factura"){
             $tipoComprobante= 01;
         }
-        
+         // Establecer la zona horaria a Perú
+         date_default_timezone_set('America/Lima');
+
+         // Carga el helper de fecha
+         helper('date');
+ 
+         // Obtiene la hora actual mas la fecha
+         $horaActualFecha = date('Y-m-d H:i:s');
+ 
+         // Extraer solamente la hora
+         $horaAcutalPeru = substr($horaActualFecha, 11, 8);
+        //Convertir de numeros a letras
+         $letras = $this->convertirNumeroALetras(85);
+
         $session = session();
 
-        $_POST['fechDocumento'];
             $data= [
                 'serieComprobante'=> $_POST['tipoDocumento'],
                 'numComprobante'=>'001',
                 'tipoComprobante'=> $tipoComprobante,
-                // 'fechaEmision',//año-mes-dia
-                // 'hora',
+                'fechaEmision'=> $_POST['fechDocumento'],
+                'hora'=> $horaAcutalPeru,
                 // 'canLetras',
                 'abrvMoneda'=>'PEN',
                 'rucDni'=>$_POST['doccliente'],
@@ -93,7 +106,7 @@ class Ventas extends BaseController
                 // 'totalConImpuesto',
                 // 'descuento',
                 // 'otrosCargos',
-                // 'importeTotal',
+                'importeTotal'=>$_POST['importeTotal'],
                 // 'ordenItem',
                 // 'cantidadProducto',
                 // 'subTotalProducto',
@@ -104,7 +117,7 @@ class Ventas extends BaseController
                 // 'nombreProducto',
                 // 'nombreProducto',
             ];
-             $this->xml($data);
+            //  $this->xml($data);
     }
 
     //Generar xml
@@ -136,5 +149,38 @@ class Ventas extends BaseController
 
         echo 'XML generado y firmado en output.xml';
     
+    }
+
+
+    public function convertirNumeroALetras($numero)
+    {
+        // Array con las representaciones de los números en letras
+        $unidades = ['', 'UNO', 'DOS', 'TRES', 'CUATRO', 'CINCO', 'SEIS', 'SIETE', 'OCHO', 'NUEVE'];
+        $diezDiecinueve = ['DIEZ', 'ONCE', 'DOCE', 'TRECE', 'CATORCE', 'QUINCE', 'DIECISÉIS', 'DIECISIETE', 'DIECIOCHO', 'DIECINUEVE'];
+        $decenas = ['', 'DIEZ', 'VEINTE', 'TREINTA', 'CUARENTA', 'CINCUENTA', 'SESENTA', 'SETENTA', 'OCHENTA', 'NOVENTA'];
+        $centenas = ['', 'CIEN', 'DOSCIENTOS', 'TRESCIENTOS', 'CUATROCIENTOS', 'QUINIENTOS', 'SEISCIENTOS', 'SETECIENTOS', 'OCHOCIENTOS', 'NOVECIENTOS'];
+
+        // Inicializamos el resultado como una cadena vacía
+        $resultado = '';
+
+        // Convertimos el número a entero para manejar casos específicos
+        $numero = (int)$numero;
+
+        // Convertimos el número a letras según su valor
+        if ($numero == 0) {
+            $resultado = 'CERO';
+        } elseif ($numero < 10) {
+            $resultado = $unidades[$numero];
+        } elseif ($numero < 20) {
+            $resultado = $diezDiecinueve[$numero - 10];
+        } elseif ($numero < 100) {
+            $resultado = $decenas[floor($numero / 10)];
+            $resultado .= ' ' . $unidades[$numero % 10];
+        } elseif ($numero < 1000) {
+            $resultado = $centenas[floor($numero / 100)];
+            $resultado .= ' ' . $this->convertirNumeroALetras($numero % 100);
+        }
+
+        return $resultado;
     }
 }

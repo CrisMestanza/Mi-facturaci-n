@@ -173,7 +173,7 @@
                                 <input type="number" class="ventaTotal" readonly>
                                 <div style="margin-left: 73px;">
                                     <span>Pago Total: S/.</span>
-                                    <input type="number" class="ventaTotal" readonly>
+                                    <input type="number" class="ventaTotal" readonly name="importeTotal">
                                 </div>
                             </div>
                         </div>
