@@ -2,10 +2,12 @@
 function mostrar(){
     echo "Hola";
 }
+//Lo que esta en mayuscula lleno
 // $id, $nombreCliente
 function generarXML($data) {
+  
     $id= $data['rucDni'];
-    $nombreCliente= $data['razonSocial'];
+    $nombreCliente= $data['razonSocialCliente'];
 
     $dom = new DOMDocument('1.0', 'ISO-8859-1');
     $dom->xmlStandalone = false;
@@ -33,28 +35,28 @@ function generarXML($data) {
     $root->appendChild($ublversion);
     $customizationid = $dom->createElement('cbc:CustomizationID',"2.0");
     $root->appendChild($customizationid);
-    $boletaid = $dom->createElement('cbc:ID','TESTEOBOLETAID');
+    $boletaid = $dom->createElement('cbc:ID','TESTEOBOLETAID'); 
     $root->appendChild($boletaid);
-    $fechaissue = $dom->createElement('cbc:IssueDate','TESTEOFECHA');
+    $fechaissue = $dom->createElement('cbc:IssueDate',$data['fechaEmision']);//'TESTEOFECHA'
     $root->appendChild($fechaissue);
-    $horaissue = $dom->createElement('cbc:IssueTime','TESTEOHORA');
+    $horaissue = $dom->createElement('cbc:IssueTime', $data['hora']);//'TESTEOHORA'
     $root->appendChild($horaissue);
-    $invoicetype = $dom->createElement('cbc:InvoiceTypeCode','AQUI VA EL TIPO DE DOCUMENTO SI ES BOLETA O FACTURA EL NUM');
+    $invoicetype = $dom->createElement('cbc:InvoiceTypeCode',$data['tipoComprobante']);//'AQUI VA EL TIPO DE DOCUMENTO SI ES BOLETA O FACTURA EL NUM'
     $root->appendChild($invoicetype);
 
     $invoicetype->setAttribute('listID','AQUI VA EL CODIGO DEL TIPO DE INVOICE, 0101 para ventas');
     $invoicetype->setAttribute('listAgencyName','PE:SUNAT');
-    $invoicetype->setAttribute('listName','Tipo de Documento');
+    $invoicetype->setAttribute('listName',$data['tipoComprobante']);//'Tipo de Documento'
     $invoicetype->setAttribute('listURI','urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo01');
     $invoicetype->setAttribute('name','Tipo de Operacion');
     $invoicetype->setAttribute('listSchemeURI','urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo51');
 
-    $note = $dom->createElement('cbc:Note','AQUI VA LA CANTIDAD EN LETRAS');
+    $note = $dom->createElement('cbc:Note',$data['canLetras']);//'AQUI VA LA CANTIDAD EN LETRAS'
     $root->appendChild($note);
 
     $note->setAttribute('languageLocaleID','1000');
 
-    $currency = $dom->createElement('cbc:DocumentCurrencyCode','AQUI VA LA ABREVIATURA DE LA MONEDA');
+    $currency = $dom->createElement('cbc:DocumentCurrencyCode','PEN');//AQUI VA LA ABREVIATURA DE LA MONEDA
     $root->appendChild($currency);
 
     $currency->setAttribute('listID','ISO 4217 Alpha');
@@ -63,35 +65,35 @@ function generarXML($data) {
 
     $signaturediv = $dom->createElement('cac:Signature');
     $root->appendChild($signaturediv);
-    $idsig = $dom->createElement('cbc:ID','AQUI VA LA RUC DE LA MUA EMPRESA');
+    $idsig = $dom->createElement('cbc:ID',$data['rucEmisor']);//'AQUI VA LA RUC DE LA MUA EMPRESA'
     $signaturediv->appendChild($idsig);
     $signatorparty = $dom->createElement('cac:SignatoryParty');
     $signaturediv->appendChild($signatorparty);
     $partyid = $dom->createElement('cac:PartyIdentification');
     $signatorparty->appendChild($partyid);
-    $idpart = $dom->createElement('cbc:ID','OTRA VEZ LA RUC AQUI');
+    $idpart = $dom->createElement('cbc:ID',$data['rucEmisor']);//'OTRA VEZ LA RUC AQUI'
     $partyid->appendChild($idpart);
     $partyname = $dom->createElement('cac:PartyName');
     $signatorparty->appendChild($partyname);
     $namepart = $dom->createElement('cbc:Name');
     $partyname->appendChild($namepart);
-    $cdatasigpart = $dom->createCDATASection('AQUI VA EL NOMBRE DE LA EMPRESA');
+    $cdatasigpart = $dom->createCDATASection($data['razonSocialEmisor']);//'AQUI VA EL NOMBRE DE LA EMPRESA'
     $namepart->appendChild($cdatasigpart);
     $dsa = $dom->createElement('cac:DigitalSignatureAttachment');
     $signaturediv->appendChild($dsa);
     $externalref = $dom->createElement('cac:ExternalReference');
     $dsa->appendChild($externalref);
-    $uriextref = $dom->createElement('cbc:URI','AQUI RUC OTRA VEZ');
+    $uriextref = $dom->createElement('cbc:URI',$data['rucEmisor']);//'AQUI RUC OTRA VEZ'
     $externalref->appendChild($uriextref);
 
     $accountingSupplierParty = $dom->createElement('cac:AccountingSupplierParty');
     $party = $dom->createElement('cac:Party');
     $partyIdentification = $dom->createElement('cac:PartyIdentification');
-    $partyIdentificationID = $dom->createElement('cbc:ID', 'LA RUC DE LA EMPRESA');
-    $partyIdentificationID->setAttribute('schemeID', '6');
+    $partyIdentificationID = $dom->createElement('cbc:ID',$data['rucEmisor']);//'LA RUC DE LA EMPRESA'
+    $partyIdentificationID->setAttribute('schemeID', '6'); //Por si acaso
     $partyIdentification->appendChild($partyIdentificationID);
     $partyName = $dom->createElement('cac:PartyName');
-    $partyNameText = $dom->createCDATASection('AQUI VA EL NOMBRE DE LA EMPRESA');
+    $partyNameText = $dom->createCDATASection($data['razonSocialEmisor']);//'AQUI VA EL NOMBRE DE LA EMPRESA'
     $partyName->appendChild($dom->createElement('cbc:Name'))->appendChild($partyNameText);
 
     $root->appendChild($accountingSupplierParty);
@@ -102,14 +104,14 @@ function generarXML($data) {
     
     $partyLegalEntity = $dom->createElement('cac:PartyLegalEntity');
     $party->appendChild($partyLegalEntity);
-    $registrationName = $dom->createCDATASection('AQUI VA EL NOMBRE DE LA EMPRESA');
+    $registrationName = $dom->createCDATASection($data['razonSocialEmisor']);//'AQUI VA EL NOMBRE DE LA EMPRESA'
     $partyLegalEntity->appendChild($dom->createElement('cbc:RegistrationName'))->appendChild($registrationName);
 
     $registrationAddress = $dom->createElement('cac:RegistrationAddress');
     $partyLegalEntity->appendChild($registrationAddress);
 
-    $registrationAddressID = $dom->createElement('cbc:ID', 'AQUI VA EL UBIGEO DE LA EMPRESA');
-    $registrationAddressID->setAttribute('schemeName', 'Ubigeos');
+    $registrationAddressID = $dom->createElement('cbc:ID',$data['ubigueo']);//'AQUI VA EL UBIGEO DE LA EMPRESA'
+    $registrationAddressID->setAttribute('schemeName', $data['ubigueo']);//'Ubigeos'
     $registrationAddressID->setAttribute('schemeAgencyName', 'PE:INEI');
     $registrationAddress->appendChild($registrationAddressID);
 
@@ -119,12 +121,12 @@ function generarXML($data) {
 
     $registrationAddress->appendChild($atp);
 
-    $registrationAddress->appendChild($dom->createElement('cbc:CityName', 'PROVINCIA'));
-    $registrationAddress->appendChild($dom->createElement('cbc:CountrySubentity', 'DEPARTAMENTO'));
-    $registrationAddress->appendChild($dom->createElement('cbc:District', 'DISTRITO'));
+    $registrationAddress->appendChild($dom->createElement('cbc:CityName', $data['provincia']));//'PROVINCIA'
+    $registrationAddress->appendChild($dom->createElement('cbc:CountrySubentity',$data['departamento']));//'DEPARTAMENTO'
+    $registrationAddress->appendChild($dom->createElement('cbc:District', $data['distrito']));//'DISTRITO'
 
     $addressLine = $dom->createElement('cac:AddressLine');
-    $addressLine->appendChild($dom->createElement('cbc:Line', 'DIRECCION DE LA MUAEMPRESA'));
+    $addressLine->appendChild($dom->createElement('cbc:Line', $data['direccion']));//'DIRECCION DE LA MUAEMPRESA'
     $registrationAddress->appendChild($addressLine);
     
     $country = $dom->createElement('cac:Country');
@@ -147,8 +149,8 @@ function generarXML($data) {
     $party->appendChild($partyIdentification);
 
     $idElement = $dom->createElement('cbc:ID', $id);
-    $idElement->setAttribute('schemeID', '1');
-    $idElement->setAttribute('schemeName', 'Documento de Identidad');
+    $idElement->setAttribute('schemeID', '1'); //Aca hay uno
+    $idElement->setAttribute('schemeName',$data['rucDni']);//'Documento de Identidad'
     $idElement->setAttribute('schemeAgencyName', 'PE:SUNAT');
     $idElement->setAttribute('schemeURI', 'urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06');
     $partyIdentification->appendChild($idElement);
@@ -170,20 +172,20 @@ function generarXML($data) {
     $taxtotal = $dom->createElement('cac:TaxTotal');
     $root->appendChild($taxtotal);
 
-    $taxamount = $dom->createElement('cbc:TaxAmount','AQUI VA EL TOTAL GRAVADO, O SEA CUANDO IMPUESTO HAY');
+    $taxamount = $dom->createElement('cbc:TaxAmount',0);//'AQUI VA EL TOTAL GRAVADO, O SEA CUANDO IMPUESTO HAY'
     $taxtotal->appendChild($taxamount);
 
-    $taxamount->setAttribute('currencyID','AQUI VA LA ABREVIATURA DE LA MONEDA, POR EJ PEN');
+    $taxamount->setAttribute('currencyID','PEN');//'AQUI VA LA ABREVIATURA DE LA MONEDA, POR EJ PEN'
 
     $taxsubtotal = $dom->createElement('cac:TaxSubtotal');
     $taxtotal->appendChild($taxsubtotal);
 
-    $taxableamount = $dom->createElement('cbc:TaxableAmount','MONTO DE VENTA TOTAL');
-    $taxableamount->setAttribute('currencyID','AQUI VA LA ABREVIATURA DE LA MONEDA, POR EJ PEN');
+    $taxableamount = $dom->createElement('cbc:TaxableAmount',$data['ventaTotal']);//'MONTO DE VENTA TOTAL'
+    $taxableamount->setAttribute('currencyID','PEN');//'AQUI VA LA ABREVIATURA DE LA MONEDA, POR EJ PEN'
     $taxsubtotal->appendChild($taxableamount);
 
-    $taxamountchild = $dom->createElement('cbc:TaxAmount','AQUI VA TOTAL IGV');
-    $taxamountchild->setAttribute('currencyID','AQUI VA LA ABREVIATURA DE LA MONEDA');
+    $taxamountchild = $dom->createElement('cbc:TaxAmount',0);//'AQUI VA TOTAL IGV'
+    $taxamountchild->setAttribute('currencyID','PEN');//'AQUI VA LA ABREVIATURA DE LA MONEDA'
     $taxsubtotal->appendChild($taxamountchild);
 
     $taxcategory = $dom->createElement('cac:TaxCategory');
@@ -198,49 +200,50 @@ function generarXML($data) {
     $taxidscheme->setAttribute('schemeURI','urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo05');
     $taxscheme->appendChild($taxidscheme);
 
-    $taxscheme->appendChild($dom->createElement('cbc:Name','EXO'));
-    $taxscheme->appendChild($dom->createElement('cbc:TaxTypeCode','VAT'));
+    $taxscheme->appendChild($dom->createElement('cbc:Name','EXO'));//Leer
+    $taxscheme->appendChild($dom->createElement('cbc:TaxTypeCode','VAT'));//Leer
 
     $legalmonetary = $dom->createElement('cac:LegalMonetaryTotal');
     $root->appendChild($legalmonetary);
 
-    $lineextension = $dom->createElement('cbc:LineExtensionAmount','TOTAL DE LA VENTA');
-    $lineextension->setAttribute('currencyID','ABREVIATURA DE LA MONEDA, POR EJ PEN');
+    $lineextension = $dom->createElement('cbc:LineExtensionAmount',$data['ventaTotal']);//'TOTAL DE LA VENTA'
+    $lineextension->setAttribute('currencyID','PEN');//'ABREVIATURA DE LA MONEDA, POR EJ PEN'
     $legalmonetary->appendChild($lineextension);
 
-    $taxinclusive = $dom->createElement('cbc:TaxInclusiveAmount','TOTAL DE LA VENTA');
-    $taxinclusive->setAttribute('currencyID','ABREVIATURA DE LA MONEDA, POR EJ PEN');
+    $taxinclusive = $dom->createElement('cbc:TaxInclusiveAmount',$data['ventaTotal']);//'TOTAL DE LA VENTA'
+    $taxinclusive->setAttribute('currencyID','PEN');//'ABREVIATURA DE LA MONEDA, POR EJ PEN'
     $legalmonetary->appendChild($taxinclusive);
 
-    $allowancetotal = $dom->createElement('cbc:AllowanceTotalAmount','00 veo q le ponen siempre xd');
-    $allowancetotal->setAttribute('currencyID','ABREVIATURA DE LA MONEDA, POR EJ PEN');
+    $allowancetotal = $dom->createElement('cbc:AllowanceTotalAmount',00);//'00 veo q le ponen siempre xd'
+    $allowancetotal->setAttribute('currencyID','PEN');//'ABREVIATURA DE LA MONEDA, POR EJ PEN'
     $legalmonetary->appendChild($allowancetotal);
 
-    $chargetotal = $dom->createElement('cbc:ChargeTotalAmount','00 veo q le ponen siempre xd');
-    $chargetotal->setAttribute('currencyID','ABREVIATURA DE LA MONEDA, POR EJ PEN');
+    $chargetotal = $dom->createElement('cbc:ChargeTotalAmount',00);//'00 veo q le ponen siempre xd'
+    $chargetotal->setAttribute('currencyID','PEN');//'ABREVIATURA DE LA MONEDA, POR EJ PEN'
     $legalmonetary->appendChild($chargetotal);
 
-    $prepaidamount = $dom->createElement('cbc:PrepaidAmount','00 veo q le ponen siempre xd, es anticipo xd');
-    $prepaidamount->setAttribute('currencyID','ABREVIATURA DE LA MONEDA, POR EJ PEN');
+    $prepaidamount = $dom->createElement('cbc:PrepaidAmount',00);//'00 veo q le ponen siempre xd, es anticipo xd'
+    $prepaidamount->setAttribute('currencyID','PEN');//'ABREVIATURA DE LA MONEDA, POR EJ PEN'
     $legalmonetary->appendChild($prepaidamount);
 
-    $payableamount = $dom->createElement('cbc:PayableAmount','TOTAL DE LA VENTA');
-    $payableamount->setAttribute('currencyID','ABREVIATURA DE LA MONEDA, POR EJ PEN');
+    $payableamount = $dom->createElement('cbc:PayableAmount',$data['ventaTotal']);//'TOTAL DE LA VENTA'
+    $payableamount->setAttribute('currencyID','PEN');//'ABREVIATURA DE LA MONEDA, POR EJ PEN'
     $legalmonetary->appendChild($payableamount);
 
     /*esto de manera recursiva por todas las lineas del invoice*/
+    foreach ($data['productos'] as $indice=>$producto) {
 
     $invoiceline = $dom->createElement('cac:InvoiceLine');
     $root->appendChild($invoiceline);
 
-    $invoiceline->appendChild($dom->createElement('cbc:ID','AQUI VA EL NUMERO D INVOICE, 1 AL COMENZAR Y +1 POR CADA LINEA'));
+    $invoiceline->appendChild($dom->createElement('cbc:ID',$indice+1));//'AQUI VA EL NUMERO D INVOICE, 1 AL COMENZAR Y +1 POR CADA LINEA'
 
-    $invoicequantity = $dom->createElement('cbc:InvoicedQuantity','AQUI VA LA CANTIDAD DEL PRODUCTO, 2 decimales');
-    $invoicequantity->setAttribute('unitCode','AQUI VA EL CODIGO D LA UNIDAD SEGUN DB');
+    $invoicequantity = $dom->createElement('cbc:InvoicedQuantity',$producto['cantidadprod']);//'AQUI VA LA CANTIDAD DEL PRODUCTO, 2 decimales'
+    $invoicequantity->setAttribute('unitCode','AQUI VA EL CODIGO D LA UNIDAD SEGUN DB'); //Faltaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
     $invoiceline->appendChild($invoicequantity);
 
-    $lineextensionamount = $dom->createElement('cbc:LineExtensionAmount','AQUI VA CUANTO SALE EL SUBTOTAL DE ESTE PRODUCTO, con dos decimales');
-    $lineextensionamount->setAttribute('currencyID','ABREVIATURA DE LA MONEDA');
+    $lineextensionamount = $dom->createElement('cbc:LineExtensionAmount',$producto['subtotal']);//'AQUI VA CUANTO SALE EL SUBTOTAL DE ESTE PRODUCTO, con dos decimales'
+    $lineextensionamount->setAttribute('currencyID','PEN');//'ABREVIATURA DE LA MONEDA'
     $invoiceline->appendChild($lineextensionamount);
 
     $pricingreference = $dom->createElement('cac:PricingReference');
@@ -249,8 +252,8 @@ function generarXML($data) {
     $alternativecondition = $dom->createElement('cac:AlternativeConditionPrice');
     $pricingreference->appendChild($alternativecondition);
 
-    $altpriceamount = $dom->createElement('cbc:PriceAmount','AQUI VA EL PRECIO UNITARIO DEL PRODUCTO, CON UN DECIMAL SI TUVIERA, SINO EL NUMERO ENTERO SOLO');
-    $altpriceamount->setAttribute('currencyID','ABREVIATURA DE LA MONEDA');
+    $altpriceamount = $dom->createElement('cbc:PriceAmount',$producto['preciounit']);//'AQUI VA EL PRECIO UNITARIO DEL PRODUCTO, CON UN DECIMAL SI TUVIERA, SINO EL NUMERO ENTERO SOLO'
+    $altpriceamount->setAttribute('currencyID','PEN');//'ABREVIATURA DE LA MONEDA'
     $alternativecondition->appendChild($altpriceamount);
 
     $altpricetypecode = $dom->createElement('cbc:PriceTypeCode','01');
@@ -263,18 +266,18 @@ function generarXML($data) {
     $invoiceline->appendChild($invtaxtotal);
 
     $tttaxamount = $dom->createElement('cbc:TaxAmount','0.00');
-    $tttaxamount->setAttribute('currencyID','ABREVIATURA DE MONEDA');
+    $tttaxamount->setAttribute('currencyID','PEN');//'ABREVIATURA DE MONEDA'
     $invtaxtotal->appendChild($tttaxamount);
 
     $tttaxsubtotal = $dom->createElement('cac:TaxSubtotal');
     $invtaxtotal->appendChild($tttaxsubtotal);
 
-    $tsttaxableamount = $dom->createElement('cbc:TaxableAmount','PRECIO SUBTOTAL DEL PRODUCTO, 2 DECIMALES');
-    $tsttaxableamount->setAttribute('currencyID','ABREVIATURA DE LA MONEDA');
+    $tsttaxableamount = $dom->createElement('cbc:TaxableAmount',$producto['subtotal']);//'PRECIO SUBTOTAL DEL PRODUCTO, 2 DECIMALES'
+    $tsttaxableamount->setAttribute('currencyID','PEN');//'ABREVIATURA DE LA MONEDA'
     $tttaxsubtotal->appendChild($tsttaxableamount);
 
     $tstaxamount = $dom->createElement('cbc:TaxAmount','0.00');
-    $tstaxamount->setAttribute('currencyID','ABREVIATURA DE LA MONEDA');
+    $tstaxamount->setAttribute('currencyID','PEN');//'ABREVIATURA DE LA MONEDA'
     $tttaxsubtotal->appendChild($tstaxamount);
 
     $tstaxcategory = $dom->createElement('cac:TaxCategory');
@@ -293,14 +296,14 @@ function generarXML($data) {
     $invoiceitem = $dom->createElement('cac:Item');
     $invoiceline->appendChild($invoiceitem);
 
-    $descripcionpro = $dom->createCDATASection('NOMRBE DE PRODUCTO');
+    $descripcionpro = $dom->createCDATASection($producto['nomproducto']);//'NOMRBE DE PRODUCTO'
     $descripcion = $dom->createElement('cbc:Description');
     $descripcion->appendChild($descripcionpro);
     $invoiceitem->appendChild($descripcion);
 
     $iditemseller = $dom->createElement('cac:SellersItemIdentification');
     $invoiceitem->appendChild($iditemseller);
-    $iditemseller->appendChild($dom->createElement('cbc:ID','AQUI VA EL ID DEL PRODUCTO SEGUN NUESTRA DB'));
+    $iditemseller->appendChild($dom->createElement('cbc:ID','AQUI VA EL ID DEL PRODUCTO SEGUN NUESTRA DB'));//Faltaaaaaaaaa
 
     $iditemsunat = $dom->createElement('cac:CommodityClassification');
     $invoiceitem->appendChild($iditemsunat);
@@ -309,9 +312,11 @@ function generarXML($data) {
     $price = $dom->createElement('cac:Price');
     $invoiceitem->appendChild($price);
 
-    $ppriceamount = $dom->createElement('cbc:PriceAmount','AQUI VA PRECIO UNITARIO, CON UN SOLO DECIMAL SI TUVIERA');
-    $ppriceamount->setAttribute('currencyID','ABREVIATURA DE LA MONEDA');
+    $ppriceamount = $dom->createElement('cbc:PriceAmount',$producto['preciounit']);//'AQUI VA PRECIO UNITARIO, CON UN SOLO DECIMAL SI TUVIERA'
+    $ppriceamount->setAttribute('currencyID','PEN');//'ABREVIATURA DE LA MONEDA'
     $price->appendChild($ppriceamount);
+    }
+    //Termina del producto
     
     // Formatea el XML para que sea legible
     $dom->formatOutput = true;

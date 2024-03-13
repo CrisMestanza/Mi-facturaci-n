@@ -121,6 +121,13 @@
         </a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link " href="<?=base_url()?>series">
+          <i class="bi bi-grid"></i>
+          <span>Series</span>
+        </a>
+      </li>
+
     </ul>
 
   </aside><!-- End Sidebar-->

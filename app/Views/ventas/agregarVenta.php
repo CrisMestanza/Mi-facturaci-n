@@ -51,14 +51,17 @@
 
                             <select name="tipoDocumento" id="tipoDocumento" class="form-control"  aria-label="With textarea">
                                 <?php foreach ($tipoDocumento as $tipoDocumento) {?>
-                                    <option value="<?= $tipoDocumento['nombredocumento'] ?>"> <?= $tipoDocumento['nombredocumento'] ?> </option>
+                                    <option value="<?= $tipoDocumento['idtipodocumento'] ?>"> <?= $tipoDocumento['nombredocumento'] ?> </option>
                                 <?php } ?>
                             </select>
                         </div>
 
-                        <div class="input-group">
-                            <label class="input-group-text">Serie</label>
-                            <input type="text" class="form-control" aria-label="With textarea" id="serie" name="serie">
+                        <div class="input-group" id="compra">
+                            <label class="input-group-text">Serie:</label>
+
+                            <select name="serie" id="serie" class="form-control"  aria-label="With textarea">
+                                    
+                            </select>
                         </div>
 
                         <div class="input-group">
@@ -356,19 +359,31 @@ $(function(){
         });
     }
 
-    $('#tipoDocumento').change(function(){
-        let seleccion = $(this).val();
-        let serie = "";
-        if(seleccion=="Boleta"){
-            serie = "B001"
-        }
-        else if (seleccion=="Factura") {
-            serie = "F001" 
-        }
-        
-        $('#serie').val(serie);
 
+
+    $('#tipoDocumento').change(function(){
+
+        $.ajax({
+            url: '<?= base_url("ventas/recibirTipoDoc") ?>',
+            type: 'POST',
+            dataType: 'json',
+            data: { doc: $("#tipoDocumento").val() },
+            success: function(response) {
+                // Limpia el select antes de agregar nuevas opciones
+                $('#serie').empty();
+                
+                $.each(response, function(index, value) {
+                    // Creo y agrego opciones al select
+                    $('#serie').append('<option value="' + value.idnumserie + '">' + value.numserie + '</option>');
+                });
+            },
+            error: function(xhr, status, error) {
+                console.log("Error:", error);
+            }
+        });
     });
+
+    
 })
 
 
@@ -376,3 +391,5 @@ $(function(){
 
     
 </script>
+
+

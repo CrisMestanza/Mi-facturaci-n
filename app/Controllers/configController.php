@@ -51,6 +51,8 @@ class configController extends BaseController
         $resultDistrito = $getDistrito[0]['nombredistrito'];
 
         $session = session();
+        $session->set('rucEmisor',$_POST['rucCategoria']);
+        $session->set('razonSocialEmisor',$_POST['razonSocial']);
         $session->set('ubigueo',$_POST['ubigueo']);
         $session->set('provincia',$resultProvincia);
         $session->set('distrito',$resultDistrito);

@@ -54,8 +54,15 @@ $routes->post('/configuracion/editar/','configController::editar/');
 //Ventas
 $routes->get('/ventas','Ventas::ventas');
 $routes->get('/ventas/nuevaventa','Ventas::setVenta');
+$routes->post('/ventas/recibirTipoDoc','Ventas::buscarTipoDoc');
 $routes->post('ventas/generar','Ventas::recibirDatosXml');
 
 //Home
 $routes->get('/logout','Home::logout');
 $routes->get('/ventas/api','Home::api');
+
+//series
+$routes->get('/series','Series::series');
+$routes->post('/series/agregar','Series::agregarSerie');
+$routes->post('/series/editar','Series::editarSerie');
+$routes->get('/series/eliminar/(:num)','Series::eliminarNumSerie/$1');

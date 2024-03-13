@@ -30,4 +30,13 @@ class TipoDocumentoModel extends Model
         return $result;
     }
 
+    public function getTipoDocumentoId($id){
+        $builder= $this->db->table('tipodocumento ');
+        $builder->where('estado', 1);
+        $builder->where('idtipodocumento', $id);
+        $result=$builder->get()->getResultArray();
+        return $result;
+    }
+
+
 }
